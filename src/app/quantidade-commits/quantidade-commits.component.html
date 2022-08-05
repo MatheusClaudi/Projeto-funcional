@@ -1,0 +1,9 @@
+<div>
+  <h2>Pessoas que mais contribuiram</h2>
+  <button (click)="fazRequisicao()">faz a request</button>
+  <div class="parentDiv">
+    <ul>
+      <li *ngFor="let c_n of count_names" class="element"><b>Name:</b> {{c_n[1]}} : <b>Quantidade de commits:</b> {{c_n[0]}}</li>
+    </ul>
+  </div>
+</div>

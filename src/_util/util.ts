@@ -13,15 +13,15 @@ export default class Utils {
         }
     }
     
-    static groupBy<T extends {[atributo : string | number] : any}>(colecao: T[], atributo: string | number) : { unknown : T[] }[] | {} {
+    static groupBy<T extends {[atributo : string | number] : any}>(colecao: T[], atributo: string | number) : {}[] {
         if (colecao.length === 0){
-            return {}
+            return []
         } else {
             const zero = colecao[0];
             const equal = colecao.filter((x) => x[atributo] === zero[atributo]);
             const different = colecao.filter((x) => x[atributo] !== zero[atributo]);
             let val : string | number = zero[atributo];
-            return { [val] : equal, ...Utils.groupBy(different,atributo)}
+            return [{ [val] : equal } , ...Utils.groupBy(different,atributo)]
         }
     }
     

@@ -1,16 +1,20 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { QuantidadeCommitsComponent } from './quantidade-commits/quantidade-commits.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    QuantidadeCommitsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

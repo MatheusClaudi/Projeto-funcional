@@ -1,0 +1,15 @@
+.element {
+  border: 1px solid black;
+  list-style-type: none;
+  padding: 0.5rem;
+  margin-bottom: 0.2rem;
+  border-radius: 0.2rem;
+}
+
+.parentDiv {
+  width: 40rem;
+}
+
+ul {
+  padding-left: 0px;
+}
