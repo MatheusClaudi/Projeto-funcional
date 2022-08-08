@@ -1,0 +1,18 @@
+<div class="card-content-container">
+    <app-filter-painel [showfilter]="true"
+                       [showSort]="true"
+                       (formData)="handleNewFilters($event)"></app-filter-painel>
+    <table>
+        <tr>
+            <th *ngFor="let col of tableColumns">{{ col.label }}</th>
+        </tr>
+        <tr *ngFor="let row of tableData">
+            <td *ngFor="let col of tableColumns">{{ getObjectAtribute(row, col.key) }}</td>
+        </tr>
+    </table>
+    <div class="pagination">
+        <a (click)="previousPage()">&laquo;</a>
+        <p>Página {{ currentPage }} de {{ totalPages }}</p>
+        <a (click)="nextPage()">&raquo;</a>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="hide-section">
+    <div class="header row">
+        <h1 class="text-format"> Filtros e ordenação</h1>
+        <svg *ngIf="!isSectionOpen" class="toogle-icon" (click)="toogleSection()"></svg>
+        <svg *ngIf="isSectionOpen" class="toogle-icon rotate" (click)="toogleSection()"></svg>
+    </div>
+    <div *ngIf="isSectionOpen" class="content col">
+        <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+            <div *ngIf="showfilter" class="section text-format col">
+                <label>Country</label>
+                <select class="box text-format" formControlName="filterColumn">
+                    <option value="australia">Australia</option>
+                    <option value="canada">Canada</option>
+                    <option value="usa">USA</option>
+                </select>
+
+                <label>Last Name</label>
+                <input class="box text-format" type="text" formControlName="filterField" placeholder="Your last name..">
+            </div>
+            <div *ngIf="showSort" class="section text-format col">
+                <label>Country</label>
+                <select class="box text-format" formControlName="sortColumn">
+                    <option value="australia">Australia</option>
+                    <option value="canada">Canada</option>
+                    <option value="usa">USA</option>
+                </select>
+
+                <label>Country</label>
+                <select class="box text-format" formControlName="order">
+                    <option value="australia">Australia</option>
+                    <option value="canada">Canada</option>
+                    <option value="usa">USA</option>
+                </select>
+            </div>
+            <button type="submit" class="confirm-btn"> Aplicar </button>
+        </form>
+    </div>
+</div>

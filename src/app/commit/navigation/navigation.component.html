@@ -1,0 +1,21 @@
+<div class="container">
+    <div *ngIf="isSelectorOpen" class="box selector">
+        <svg class="github-icon"></svg>
+        <h1> {{ options[indexOfSelectedOption].label }} </h1>
+        <svg class="toogle-icon" (click)="toogleSelector()"></svg>
+    </div>
+    <div class="box selector open" *ngIf="!isSelectorOpen">
+        <svg class="github-icon"></svg>
+        <h1> {{ options[indexOfSelectedOption].label }} </h1>
+        <svg class="toogle-icon rotate" (click)="toogleSelector()"></svg>
+        <div class="options">
+            <div class="option"
+                 *ngFor="let option of options; index as i"
+                 (click)="selectOption(i)">
+                <h1> {{ option.label }} </h1>
+                <svg *ngIf="indexOfSelectedOption === i" class="record-fill-icon"></svg>
+                <svg *ngIf="indexOfSelectedOption !== i" class="record-icon"></svg>
+            </div>
+        </div>
+    </div>
+</div>

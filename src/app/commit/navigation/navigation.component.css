@@ -1,0 +1,95 @@
+.container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+
+.selector {
+    display: grid;
+    grid-template-areas: "git curr anchor" "opt opt opt";
+    grid-template-columns: 65px auto 30px;
+    align-items: center;
+    width: 400px;
+    padding: 10px 10px 8px 15px;
+}
+
+.selector h1 {
+    grid-area: curr;
+    color: var(--text-color);
+    font-size: 18px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    font-weight: normal;
+    margin-top: 5px;
+    overflow-x: hidden;
+}
+
+.selector .toogle-icon {
+    grid-area: anchor;
+    margin-top: 2px;
+}
+
+.selector .github-icon {
+    grid-area: git;
+}
+
+.open .options {
+    grid-area: opt;
+    margin: 8px 0px 8px 0px;
+    border-top: 1px solid #30363d !important;
+    max-width: 100%;
+}
+
+.open .option {
+    cursor: pointer;
+    margin: 8px 15px 0px 35px;
+    max-width: 100%;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.option .record-fill-icon, .option .record-icon{
+    margin-top: 3px;
+}
+
+.options h1 {
+    font-size: 17px;     
+}
+
+.toogle-icon {
+    --len: 25px;
+}
+
+.github-icon {
+    --len: 35px;
+    background: url('../../../assets/icons/github.svg');
+    display: block;
+    text-indent: -9999px;
+    width: var(--len);
+    height: var(--len);
+    background-size: var(--len) var(--len);
+}
+
+.record-icon {
+    --len: 10px;
+    background: url('../../../assets/icons/record.svg');
+    display: block;
+    text-indent: -9999px;
+    width: var(--len);
+    height: var(--len);
+    background-size: var(--len) var(--len);
+}
+
+.record-fill-icon {
+    --len: 10px;
+    background: url('../../../assets/icons/record-fill.svg');
+    display: block;
+    text-indent: -9999px;
+    width: var(--len);
+    height: var(--len);
+    background-size: var(--len) var(--len);
+}

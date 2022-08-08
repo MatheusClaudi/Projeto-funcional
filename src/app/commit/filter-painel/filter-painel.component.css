@@ -1,0 +1,38 @@
+.confirm-btn {
+    width: 150px;
+    margin-top: 15px;
+    align-self: center;
+}
+
+.hide-section h1 {
+    font-size: 20px;
+}
+
+.hide-section {
+    margin-bottom: 30px;
+}
+
+.hide-section .content {
+    width: 90%;
+    margin: 0px 0px 10px 15px;
+}
+
+.hide-section .section {
+    margin: 10px 0px 10px 0px;
+}
+
+.hide-section .section {
+    gap: 15px;
+}
+
+.hide-section input::placeholder {
+    color: var(--text-color);
+}
+
+.toogle-icon {
+    --len: 20px;
+}
+
+.header {
+    gap: 10px;
+}
