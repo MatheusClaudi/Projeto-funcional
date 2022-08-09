@@ -1,1 +1,85 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --background: #161B22;
+    --theme: #0D1117;
+    --text-color: #fff;
+    --text-color-2: #C9D1D9;
+    --text-color-3: #FBFBFB;
+}
+
+.box {
+    border-color: #30363d;;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 6px;
+    background-color: var(--theme);
+    box-shadow: 0 3px 6px #010409 !important;
+}
+
+.text-format {
+    color: var(--text-color);
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    font-weight: normal;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+input, .hide-section select {
+    height: 35px;
+    padding-left: 15px;
+    overflow: auto;
+}
+
+.card-content-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 90%;
+    overflow: auto;
+    margin: 25px 5% 0px 5%;
+}
+
+.confirm-btn {
+    color: var(--text-color);
+    background-color: #238636;
+    border-color: rgba(240,246,252,.1);
+    box-shadow: 0 0 transparent;
+    padding: 0.3em 1.2em;
+    font-size: inherit;
+    line-height: 1.5;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.confirm-btn:hover {
+    background-color: #2ea043;
+}
+
+.toogle-icon {
+    background: url('./assets/icons/chevron-down.svg');
+    display: block;
+    text-indent: -9999px;
+    width: var(--len);
+    height: var(--len);
+    background-size: var(--len) var(--len);
+    cursor: pointer;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}

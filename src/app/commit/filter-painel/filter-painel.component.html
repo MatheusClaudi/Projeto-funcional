@@ -1,0 +1,37 @@
+<div class="hide-section">
+    <div class="header row">
+        <h1 class="text-format"> Filtros e ordenação</h1>
+        <svg *ngIf="!isSectionOpen" class="toogle-icon" (click)="toogleSection()"></svg>
+        <svg *ngIf="isSectionOpen" class="toogle-icon rotate" (click)="toogleSection()"></svg>
+    </div>
+    <div *ngIf="isSectionOpen" class="content col">
+        <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+            <div *ngIf="showfilter" class="section text-format col">
+                <label>Campo para filtragem:</label>
+                <select class="box text-format" formControlName="filterColumn">
+                    <option value="" disabled selected>Escolha um campo para filtrar</option>
+                    <option *ngFor="let opt of filterOptions">{{ opt.label }}</option>
+                </select>
+
+                <label>Filtrar por:</label>
+                <input class="box text-format" type="text" formControlName="filterField" placeholder="Digite o valor para filtrar">
+            </div>
+            <div *ngIf="showSort" class="section text-format col">
+                <label>Campo para ordenar:</label>
+                <select class="box text-format" formControlName="sortColumn">
+                    <option value="" disabled selected>Escolha um campo para ordenar</option>
+                    <option *ngFor="let opt of filterOptions">{{ opt.label }}</option>
+                </select>
+
+                <label>Ordem:</label>
+                <select class="box text-format" formControlName="order">
+                    <option value="" disabled selected>Escolha método de ordenar</option>
+                    <option value="0">Não ordenar</option>
+                    <option value="1">Ascedente</option>
+                    <option value="-1">Decrecente</option>
+                </select>
+            </div>
+            <button type="submit" class="confirm-btn"> Aplicar </button>
+        </form>
+    </div>
+</div>
