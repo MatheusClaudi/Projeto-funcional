@@ -1,4 +1,5 @@
 import { ICommit } from "./commit";
+import * as moment from 'moment';
 
 export class CommitTableData {
     author: string;
@@ -12,7 +13,7 @@ export class CommitTableData {
        this.author = data.commit.author.name
        this.authorEmail = data.commit.author.email;
        this.commiterEmail = data.commit.committer.email;
-       this.date = data.commit.author.date;
+       this.date = this.handleDate(data.commit.author.date);
        this.qtd_comments = data.commit.comment_count;
        this.verify = this.handleVerify(data.commit.verification.verified); 
     }
@@ -20,4 +21,8 @@ export class CommitTableData {
     handleVerify(verify: boolean) {
         return verify ? 'Sim' : 'Não'
     }
-}
+
+    handleDate(date: string) {
+        return (moment(date)).format('DD/MM/YYYY')
+    }
+} 
