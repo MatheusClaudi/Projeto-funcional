@@ -10,30 +10,46 @@ import Utils from "../../../_util/util"
 export class CommitsRankingComponent implements OnInit {
 
   public count_names : any = []
+  public rawCommitData: any = []
+  public commitDataFiltered: any = []
 
   constructor(
     private stateService: SharedStateService
   ) {
     this.stateService.rawCommits.subscribe((data) => { 
-
-      data = data.map((x : any) => x.commit.author);
-
-      let authors = Utils.groupBy<any>(data,'name');
-
-      let counts = authors.map((x : any) => {
-        let name : string = Object.keys(x)[0];
-        return [x[name].length,name];
-      })
-
-      counts = counts.sort((x : any,y : any) => y[0] - x[0]);
-      
-      this.count_names = counts;
+      this.updateInfos(data);
+      this.rawCommitData = data;
     });
   }
 
   ngOnInit(): void {
     this.stateService.getCommitsFromAPI();
     this.stateService.updateCurrentSection('Quantidade de commits por desenvolvedor')
+  }
+
+  updateInfos(data: any) {
+    data = data.map((x : any) => x.commit.author);
+
+    let authors = Utils.groupBy<any>(data,'name');
+
+    let counts = authors.map((x : any) => {
+      let name : string = Object.keys(x)[0];
+      return [x[name].length,name];
+    })
+
+    counts = counts.sort((x : any,y : any) => y[0] - x[0]);
+    
+    this.count_names = counts;
+  }
+
+  handleNewFilters(e : any) {
+    let path = e.filter.params.path;
+    let field = e.filter.params.type;
+    let value = e.filter.value
+    console.log(path,field,value)
+    this.commitDataFiltered = this.rawCommitData
+        .filter((data : any) => Utils.isLeftEqualsRight(value, Utils.getFieldFromObjectPath(path, data), field))
+    this.updateInfos(this.commitDataFiltered);
   }
 
 }
