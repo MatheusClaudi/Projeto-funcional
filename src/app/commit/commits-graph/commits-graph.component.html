@@ -1,1 +1,11 @@
-<app-filter-painel [showfilter]="true"></app-filter-painel>
+<div class="card-content-container">
+    <p class="section-p text-format">Descrição:</p>
+    <p class="paragra-p text-format">
+        Abaixo está presente um grafo que representa a árvore evolução de commits 
+        no repositório. Se um node do grafo é atingido por uma seta significa que o 
+        commit foi diretamente na branch, se for atingido por mais de uma siginifica que
+        é resultado de um Pull request. Obs: Estão listados apenas os nodes recuperados na 
+        consulta da API.
+    </p>
+    <app-graph-chart [nodes]="nodes" [links]="edges"></app-graph-chart>
+</div>

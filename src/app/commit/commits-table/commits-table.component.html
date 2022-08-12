@@ -1,4 +1,10 @@
 <div class="card-content-container">
+    <p class="section-p text-format">Descrição:</p>
+    <p class="paragra-p text-format">
+        Abaixo é possível visualizar uma tabela que lista todos os dados obtidos
+        do consumo da API de commits, sendo possível filtrar e ordenar os dados 
+        para exibição. (Obs: Toda lógica de filtragem e paginação é feita no typescript).
+    </p>
     <app-filter-painel [showfilter]="true"
                        [showSort]="true"
                        (formData)="handleNewFilters($event)"></app-filter-painel>

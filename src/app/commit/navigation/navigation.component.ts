@@ -13,7 +13,7 @@ export class NavigationComponent implements OnInit {
     { label: 'Listagem de commits', value: '/table' },
     { label: 'Desempenho de desenvolvedores', value: '/ranking' },
     { label: 'Árvore de evolução de commits', value: '/graph' },
-    { label: 'Correlação de features', value: '/feature' }
+    { label: 'Gráfico de eficiência temporal', value: '/feature' }
   ];
 
   indexOfSelectedOption = 0;

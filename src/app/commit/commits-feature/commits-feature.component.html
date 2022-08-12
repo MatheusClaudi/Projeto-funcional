@@ -1,1 +1,15 @@
-<p>commits-feature works!</p>
+<div class="card-content-container">
+    <p class="section-p text-format">Descrição:</p>
+    <p class="paragra-p text-format">
+        Abaixo estão presentes vários gráficos, onde cada um representa o desempenho de todos os 
+        usuários recuperados da API, em relação ao número de commits com o passar do tempo.
+    </p>
+    <div *ngFor="let data of lineData">
+        <app-line-chart 
+            xAxisLabel="Anos"
+            yAxisLabel="Número commits"
+            [title]="data[0].name"
+            [data]="data"
+        ></app-line-chart>
+    </div>
+</div>

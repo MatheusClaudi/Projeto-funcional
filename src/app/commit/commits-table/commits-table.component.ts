@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { ICommit } from 'src/app/_dataModels/commit';
 import { CommitTableData } from 'src/app/_dataModels/tableCommitData';
 import Utils from 'src/_util/util';
@@ -40,34 +41,63 @@ export class CommitsTableComponent implements OnInit {
   }
 
   handleNewRawData(data: Array<ICommit>) {
-    this.rawCommitData = data;
-    this.commitDataFiltered = data;
+    const dataFormated = this.formatRawData(data);
+    this.rawCommitData = dataFormated;
+    this.commitDataFiltered = dataFormated;
     this.updateTable();
     this.resetPagination();
   }
 
+  formatRawData(rawData: ICommit[]) {
+    return rawData.reduce( 
+      (prev: any, curr: ICommit) => 
+        [...prev, 
+          {...curr, commit: 
+            {...curr.commit, author: 
+              {...curr.commit.author, 
+                date: this.formatDateValueToBr(curr.commit.author.date)
+              }}}]
+      , [])
+  }
+
+  formatDateValueToBr(d: any) {
+    return moment(
+      d.split('T')[0], 
+      'YYYY-MM-DD'
+      ).format('DD/MM/YYYY')
+  }
+
   handleNewFilters(e: any) {
-    console.log(e);
+    this.handleFilters(e);
+  }
+
+  handleFilters(e: any) {
     if (e.filter) {
       let path = e.filter.params.path;
       let field = e.filter.params.type;
       let value = e.filter.value
       this.commitDataFiltered = this.rawCommitData
         .filter(data => Utils.isLeftEqualsRight(value, Utils.getFieldFromObjectPath(path, data), field))
-      console.log(this.commitDataFiltered)
-      this.resetPagination()
-      this.updateTable()
+      this.handleOrdenation(e, this.commitDataFiltered);
     }
-    if (e.order) {
-      let path = e.order.params.path;  // caminho para a varíavel para se ordenar
-      let field = e.order.params.type; // tipo do campo para se filtrar
-      let value = e.order.value; // se value = -1 a ordem é decrescente, se for = 1 a ordem é crescente
-      console.log(path, field, value)
+    else {
+      this.handleOrdenation(e, this.rawCommitData);
+    }
+  }
 
-      // para ordenar o valor abaixo recomendo utilizar a função Util.orderBy2 em conjunto com Utils.isLeftBiggerThanRight para definir a ordem crescente ou decrescente
-      // this.commitDataFiltered = this.rawCommitData Você deve ordenar o valor de this.rawCommitData
-      // this.resetPagination() quando fizer descomenta essa linha
-      // this.updateTable() quando fizer descomenta essa linha
+  handleOrdenation(e: any, data: any) {
+    if (e.order) {
+      let path = e.order.params.path;
+      let field = e.order.params.type;
+      let value = e.order.value;
+      const func = value == 1 ? Utils.isLeftBiggerThanRight: Utils.isLeftLowerOrEqualRight;
+      this.commitDataFiltered = Utils.orderBy2(data, path, func, field);
+      this.resetPagination();
+      this.updateTable();
+    }
+    else {
+      this.resetPagination();
+      this.updateTable();
     }
   }
 

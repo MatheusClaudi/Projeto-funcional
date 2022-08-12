@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedStateService } from './_services/shared-state.service';
 import { FilterPainelComponent } from './filter-painel/filter-painel.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartModule } from '../chart/chart.module';
 
 
 
@@ -28,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AppRoutingModule,
+    ChartModule,
     FormsModule,
     ReactiveFormsModule
   ],

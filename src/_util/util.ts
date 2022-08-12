@@ -56,16 +56,29 @@ export default class Utils {
         }
     }
 
-    static orderBy2<T extends {[atributo : string | number] : any}>(colecao : T[], atributo : string | number, compare: any) : T[] | [] {
+    static orderBy2<T extends {[atributo : string | number] : any}>(colecao : T[], atributo : string, compare: any, type: string) : T[] | [] {
         if (colecao.length === 0){
             return [];
         } else if (colecao.length == 1) {
             return colecao;
         } else {
             const [head, ...tail] = colecao;
-            const left = tail.filter((x) => !compare(x[atributo], head[atributo]));
-            const right = tail.filter((x) => compare(x[atributo], head[atributo]));
-            return [...Utils.orderBy2(left,atributo, compare), head, ...Utils.orderBy2(right,atributo, compare)]
+            const ha = this.getFieldFromObjectPath(atributo, head);
+            const left = tail.filter((x) => !compare(this.getFieldFromObjectPath(atributo, x), ha, type));
+            const right = tail.filter((x) => compare(this.getFieldFromObjectPath(atributo, x), ha, type));
+            return [...Utils.orderBy2(left, atributo, compare, type), head, ...Utils.orderBy2(right, atributo, compare, type)]
+        }
+    }
+
+    static groupBy2<T extends {[atributo : string | number] : any}>(colecao: T[], path: string) : {}[] {
+        if (colecao.length === 0){
+            return []
+        } else {
+            const zero = this.getFieldFromObjectPath(path, colecao[0]);
+            const equal = colecao.filter((x) => this.getFieldFromObjectPath(path, x) === zero);
+            const different = colecao.filter((x) => this.getFieldFromObjectPath(path, x) !== zero);
+            let val : string | number = zero;
+            return [{ [val] : equal } , ...Utils.groupBy2(different, path)]
         }
     }
 
@@ -74,7 +87,7 @@ export default class Utils {
         switch (field) {
         case "date":
             let ml = moment(left, 'DD/MM/YYYY')
-            let mr = moment(right)
+            let mr = moment(right, 'DD/MM/YYYY')
             return ml.isSame(mr, 'day') && ml.isSame(mr, 'month') && ml.isSame(mr, 'year');
         case "number":
             return left == right;
@@ -90,7 +103,7 @@ export default class Utils {
     static isLeftBiggerThanRight(left: any, right: any, field: string) {
         switch (field) {
         case "date":
-            return Math.abs(moment(left, 'DD/MM/YYYY').diff(moment(right), 'days')) > 0
+            return moment(left, 'DD/MM/YYYY').diff(moment(right, 'DD/MM/YYYY'), 'days') > 0
         case "number":
             return left > right;
         case "string":
@@ -100,8 +113,25 @@ export default class Utils {
         }
     }
 
+    //  only works to compare string, number and moment.js dates in string format
+    static isLeftLowerOrEqualRight(left: any, right: any, field: string) {
+        switch (field) {
+        case "date":
+            return moment(left, 'DD/MM/YYYY').diff(moment(right, 'DD/MM/YYYY'), 'days') <= 0
+        case "number":
+            return left <= right;
+        case "string":
+            return left.toLowerCase() <= right.toLowerCase();
+        default:
+            return false;
+        }
+    }
+
     static getFieldFromObjectPath(path: string, obj: any) {
-        return path.split('.').reduce(function(prev, curr) {
+        return path.split('.').reduce(function(prev, curr: string) {
+            if (parseInt(curr)) {
+                return prev ? prev[parseInt(curr)] : null
+            }
             return prev ? prev[curr] : null
         }, obj || self)
     }

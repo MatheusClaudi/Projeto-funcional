@@ -83,3 +83,15 @@ input, .hide-section select {
 .rotate {
     transform: rotate(180deg);
 }
+
+.section-p {
+    margin-bottom: 15px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.paragra-p {
+    margin: 0px 0px 20px 30px;
+    text-align: justify;
+    text-justify: inter-word;
+}
