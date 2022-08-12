@@ -80,6 +80,11 @@ export class CommitsTableComponent implements OnInit {
         .filter(data => Utils.isLeftEqualsRight(value, Utils.getFieldFromObjectPath(path, data), field))
       this.handleOrdenation(e, this.commitDataFiltered);
     }
+    else if (!e.order && !e.filter) {
+      this.commitDataFiltered = this.rawCommitData;
+      this.resetPagination();
+      this.updateTable();
+    }
     else {
       this.handleOrdenation(e, this.rawCommitData);
     }

@@ -1,1 +1,64 @@
-<p>description works!</p>
+<div class="card-content-container">
+    <p class="section-p text-format">Descrição:</p>
+    <p class="paragra-p text-format">
+        Abaixo é possível visualizar uma curta descrição da API de dados de commit
+        usada, mostrando página de origem, exemplo de saída e features mais importantes
+        dos dados retornados.
+    </p>
+
+    <p class="section-p text-format">Origem dos dados:</p>
+    <p class="paragra-p text-format">
+        A API utilizada é oferecida pelo GitHub e tem como objetivo: 
+        listar, vizualizar e comparar commits de um repositório em específico 
+        para algum fim. Para maiores informações acesse o <a target="_blank" href="https://docs.github.com/en/rest/commits/commits">link</a> 
+        da documentação de commits.
+    </p>
+
+    <p class="section-p text-format">Formato de dado retornado:</p>
+    <p class="paragra-p text-format">
+        Ao se utilizar da API para se obter os dados de commit de um repositório
+        será retornado dados num formato semelhante a <a target="_blank" href="https://api.github.com/repos/rails/rails/commits/dbab46008bb3a34eec78a5cc91d54a8326e383d8">este</a>. Vale destacar que a 
+        depender do status do commit pode ser que um campo ou outro varie.
+    </p>
+
+    <p class="section-p text-format">Dados mais relevantes:</p>
+    <p class="paragra-p text-format">
+        Ao analisar os dados retornados no exemplo anterior e na página original da 
+        API de commit definimos que os dados que melhor descrevem o que é o commit são:
+        <li>
+            Nome autor
+        </li>
+        <li>
+            Email do autor
+        </li>
+        <li>
+            Data de realização de commit
+        </li>
+        <li>
+            Quantidade de commits por autor
+        </li>
+        <li>
+            Evolução da árvore de commits com o passar do tempo
+        </li>
+        <li>
+            Contribuição de autores com o repositório com o passar do tempo
+        </li>
+    </p>
+    <p class="paragra-p text-format">
+        Claro que existem diversas outras informações que definem um commit 
+        tais como se foi verificado ou não, url's de acesso de dados, adições 
+        e deleções, mas ao explorar a documentação da API e pegar alguns dados
+        percebemos que os dados mais comuns de se ter são os acima.
+    </p>
+    <p class="section-p text-format">Oque foi feito:</p>
+    <p class="paragra-p text-format">
+        Ao se focar nas features acima foi feito um design de site semelhante à 
+        um CRUD/painel de controle onde é possível: listar commits 
+        em formato de tabela com as informações essenciais; filtrar e ordenar esses
+        commits de acordo com alguns dados; analisar os dados buscando aqueles usuário 
+        com mais commits; análisar a evolução da árvore de commits e ver o desempenho 
+        de um usuário com o passar do tempo.
+    </p>
+
+    
+</div>

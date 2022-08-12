@@ -1,9 +1,16 @@
-<app-filter-painel [showfilter]="true" (formData)="handleNewFilters($event)">
-</app-filter-painel>
-<div class="color">
-  <div class="parentDiv">
-    <ul>
-      <li *ngFor="let c_n of count_names" class="element"><b>Name:</b> {{c_n[1]}} : <b>Quantidade de commits:</b> {{c_n[0]}}</li>
-    </ul>
-  </div>
+<div class="card-content-container">
+  <p class="section-p text-format">Descrição:</p>
+  <p class="paragra-p text-format">
+      Abaixo é possível visualizar uma listagem ranqueada e ordenada dos usuários com maiores números de commits,
+      sendo possível filtrar por características dos commits caso desejado.
+  </p>
+  <app-filter-painel [showfilter]="true" (formData)="handleNewFilters($event)">
+  </app-filter-painel>
+  <div class="color">
+    <div class="parentDiv">
+      <ul>
+        <li *ngFor="let c_n of count_names" class="element"><b>Nome:</b> {{c_n[1]}} : <b>Quantidade de commits:</b> {{c_n[0]}}</li>
+      </ul>
+    </div>
+  </div>  
 </div>
