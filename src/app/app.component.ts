@@ -9,7 +9,5 @@ import Utils from '../_util/util'
 export class AppComponent {
   title = '';
 
-  constructor() {
-    this.title = Utils.returnTitle();
-  }
+  constructor() {}
 }

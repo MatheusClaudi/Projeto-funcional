@@ -40,8 +40,8 @@ export class CommitsRankingComponent implements OnInit {
       return [x[name].length,name];
     })
 
-    counts = counts.sort((x : any,y : any) => y[0] - x[0]);
-    
+    counts = Utils.orderBy2(counts, '0', Utils.isLeftLowerOrEqualRight, 'number')
+
     this.count_names = counts;
   }
 

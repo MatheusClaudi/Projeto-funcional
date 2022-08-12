@@ -1,11 +1,7 @@
 import * as moment from 'moment';
 
 export default class Utils {
-    static returnTitle() { 
-        return 'Vazio por enquanto'; 
-    }
-
-
+// Início de funções solicitadas
     static distinct<T extends {[atributo : string | number] : any}>(colecao: T[], atributo: string | number) : T[] {
         if(colecao.length === 0)
             return []
@@ -55,7 +51,10 @@ export default class Utils {
             return aux(outf2);
         }
     }
+// Fim das funções solicitadas 
 
+    // Função de ordenação modificada para receber um path para acessar valores profundos dentro do objeto e para receber 
+    // uma função comparadora para realizar a ordenação.
     static orderBy2<T extends {[atributo : string | number] : any}>(colecao : T[], atributo : string, compare: any, type: string) : T[] | [] {
         if (colecao.length === 0){
             return [];
@@ -70,6 +69,7 @@ export default class Utils {
         }
     }
 
+    // Função de agrupamento modificada para receber um path para acessar valores profundos dentro de um objeto
     static groupBy2<T extends {[atributo : string | number] : any}>(colecao: T[], path: string) : {}[] {
         if (colecao.length === 0){
             return []
@@ -82,7 +82,19 @@ export default class Utils {
         }
     }
 
-    //  only works to compare string, number and moment.js dates in string format
+    // Função de acesso de valores profundos dentro de um objeto, recebe um path 'a.b.c' com a intenção de retornar
+    // o valor de : obj.a.b.c, se existir
+    static getFieldFromObjectPath(path: string, obj: any) {
+        return path.split('.').reduce(function(prev, curr: string) {
+            if (parseInt(curr)) {
+                return prev ? prev[parseInt(curr)] : null
+            }
+            return prev ? prev[curr] : null
+        }, obj || self)
+    }
+
+    // Função de comparação com o intuito de auxiliar no agrupamento de valores de commit
+    // Apenas suporta comparação entre valores de data, número e string
     static isLeftEqualsRight(left: any, right: any, field: string) {
         switch (field) {
         case "date":
@@ -99,7 +111,8 @@ export default class Utils {
         }
     }
 
-    //  only works to compare string, number and moment.js dates in string format
+    // Função de comparação com o intuito de auxiliar na ordenação de valores de commit (Ordem crescente)
+    // Apenas suporta comparação entre valores de data, número e string
     static isLeftBiggerThanRight(left: any, right: any, field: string) {
         switch (field) {
         case "date":
@@ -113,7 +126,8 @@ export default class Utils {
         }
     }
 
-    //  only works to compare string, number and moment.js dates in string format
+    // Função de comparação com o intuito de auxiliar na ordenação de valores de commit (Ordem decrescente)
+    // Apenas suporta comparação entre valores de data, número e string
     static isLeftLowerOrEqualRight(left: any, right: any, field: string) {
         switch (field) {
         case "date":
@@ -125,14 +139,5 @@ export default class Utils {
         default:
             return false;
         }
-    }
-
-    static getFieldFromObjectPath(path: string, obj: any) {
-        return path.split('.').reduce(function(prev, curr: string) {
-            if (parseInt(curr)) {
-                return prev ? prev[parseInt(curr)] : null
-            }
-            return prev ? prev[curr] : null
-        }, obj || self)
     }
 }
